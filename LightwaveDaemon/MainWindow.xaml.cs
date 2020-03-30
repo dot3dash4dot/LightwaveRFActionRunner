@@ -119,7 +119,7 @@ namespace LightwaveDaemon
                 try
                 {
                     Device linkPlus = _devices.First(x => x.Name == "LinkPlus");
-                    _todaysDuskTime = await _api.GetDuskTimeAsync(linkPlus);
+                    _todaysDuskTime = await _api.GetDuskTimeTimeZoneAdjustedAsync(linkPlus);
                 }
                 catch (Exception ex)
                 {
