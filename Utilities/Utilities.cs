@@ -37,7 +37,7 @@ namespace Utilities
             message.From = new System.Net.Mail.MailAddress(from);
             message.To.Add(to);
             message.Subject = subject;
-            message.Body = body;
+            message.Body = body?.Replace("\r\n", "<br />");
 
             bool localSmtpClient = false;
             if (smtpClient == null)

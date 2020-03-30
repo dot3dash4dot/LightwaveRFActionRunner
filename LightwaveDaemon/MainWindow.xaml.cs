@@ -231,7 +231,7 @@ namespace LightwaveDaemon
                     {
                         _automationRetryCount++;
 
-                        Output($"\tRetrying in 5 seconds", true);
+                        Output($"\tRetrying in 5 seconds (attempt {_automationRetryCount} of {_automationRetryLimit})", true);
 
                         //Wait briefly
                         await Task.Delay(5000);
@@ -389,7 +389,7 @@ namespace LightwaveDaemon
 
             if (isError)
             {
-                _errorStringBuilder.AppendLine(text);
+                _errorStringBuilder.AppendLine(text + "\r\n");
             }
         }
     }
