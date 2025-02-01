@@ -43,7 +43,7 @@ namespace LightwaveDaemon
         {
             foreach (var phone in Configuration.Phones)
             {
-                _personTextBlocks.Add(phone.PersonName, Helpers.FindVisualChildren<TextBlock>(this).First(x => (x.Tag as string) == phone.PersonName.ToString()));
+                _personTextBlocks.Add(phone.PersonName, UIHelper.FindVisualChildren<TextBlock>(this).First(x => (x.Tag as string) == phone.PersonName.ToString()));
             }
 
             Setup();
