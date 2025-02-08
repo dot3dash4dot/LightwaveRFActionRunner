@@ -34,15 +34,7 @@ The implementation of this is so specific that it will only currently work for a
 
 The application currently works out whether anyone is home or not by working out if their phone is on the home wifi network. Originally I planned to do that by setting up my router to give each phone a reserved IP address that could then be pinged, but iPhones don't respond to ping when they're not active!
 
-Instead, I query my Virgin Media Hub 3 broadband router for a list of devices currently connected to it, and then work out if any match the devices you have specified. You can specify the IP address of the phone if you have set this up to be static in the router, or just match by the phone name.
-
-Getting the list of connected devices is done by calling out to KarlJorgensen's Python scripts (https://github.com/KarlJorgensen/virgin-media-hub3) - thanks obviously to him for his excellent work.
-
-In order to repeat this setup, you'd need to do the following:
-* Download a local copy of the virgin-media-hub3 Python scripts and alter LightwaveDaemon's project properties so the xcopy command in the post-build events points at them
-* Install Python and ensure the python command is added to Windows' system path variable
-* From the command line, navigate to your virgin-media-hub3 folder and run "pip install -r requirements.txt"
-* Replace PASSWORD in Device Detector\VirginRouter-GetWifiConnectedDevices.py 
+Instead, I query my Virgin Media Hub 5 broadband router for a list of devices currently connected to it, and then work out if any match the devices you have specified. You can specify the IP address of the phone if you have set this up to be static in the router, or just match by the phone name. (Note that this project previously supported the older Virgin Media Hub 3 - you can see the implementation of this along with a description in the README at the [virgin-media-hub3 tag](https://github.com/dot3dash4dot/LightwaveRFActionRunner/tree/virgin-media-hub3).)
 
 For future reference, other options for a home/away implementation that I considered were:
 * Checking if the phone's bluetooth address is visible to the server
@@ -59,14 +51,14 @@ These emails require defining an SMTP server, as discussed below.
 
 #### Setting Up The Application
 
-The application is designed so that most of the configuration data is in one place: Configuration.cs. 
+The application is designed so that most of the configuration data is in one place: `Configuration.cs`. 
 
 ##### Devices
 
 In order to set up a device:
 
-* Provide an enum for the device
-* Then in `DeviceRealNameLookup`, provide the name that the Lightwave API returns for each device - an easy way of getting these names is by putting a breakpoint after `GetDevicesInFirstStructureAsync`. This name will be used to trigger the device so must match the API exactly.
+* Add an enum member for the device
+* If the name that the Lightwave API returns for each device is different to the enum name (e.g. if it contains spaces) then add a `[Description]` to the member. An easy way of getting these API names is by putting a breakpoint after `GetDevicesInFirstStructureAsync`. This name will be used to trigger the device so must match the API exactly.
 
 ##### Automations
 
@@ -82,7 +74,9 @@ You can then set up automations to be run at certain times. Each automation has 
 
 ##### Home/Away Dependency
 
-`Phones` should contain a list of phones that should be checked when determining if anyone is home.
+Set the router's connection details in `RouterIP` and `RouterPassword`.
+
+`Phones` should then contain a list of phones that should be checked when determining if anyone is home.
 
 * Person Name is just there as a way of showing whose phone is whose and is not used for any other purpose
 * Phone Name is what is looked for when querying the devices connected to the route, unless an IP address is provided for the phone

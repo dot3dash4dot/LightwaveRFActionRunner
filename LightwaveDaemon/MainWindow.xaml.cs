@@ -314,9 +314,9 @@ namespace LightwaveDaemon
             IEnumerable<(string Name, string IP)> connectedDevices = null;
             try
             {
-                await Task.Run(() => //Don't lock the UI
+                await Task.Run(async () => //Don't lock the UI
                 {
-                    connectedDevices = VirginRouter.GetWifiConnectedDevices();
+                    connectedDevices = await VirginRouter.GetWifiConnectedDevices(Configuration.RouterIP, Configuration.RouterPassword);
                 });
             }
             catch (Exception ex)

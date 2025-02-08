@@ -19,7 +19,5 @@
   <ItemGroup>
     <PackageReference Include="LightwaveRFLinkPlusSharp" Version="1.1.4" />
   </ItemGroup>
-  <PropertyGroup>
-    <PostBuildEvent>xcopy ..\..\..\..\virgin-media-hub3 .\virgin-media-hub3 /i /y</PostBuildEvent>
-  </PropertyGroup>
+  <PropertyGroup />
 </Project>

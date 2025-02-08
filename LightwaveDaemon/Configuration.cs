@@ -16,6 +16,10 @@ namespace LightwaveDaemon
         public static string EmailFromAddress = "address@domain.com"; 
         public static string EmailToAddress = "address@domain.com";
 
+        //Router connection details
+        public static string RouterIP = "";
+        public static string RouterPassword = "";
+
         public static Phone[] Phones =
         [
             new Phone("PERSON NAME", "PHONE NAME", "OPTIONAL FIXED PHONE IP")
