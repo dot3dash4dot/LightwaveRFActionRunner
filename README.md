@@ -87,6 +87,6 @@ Set the router's connection details in `RouterIP` and `RouterPassword`.
 * Set the email addresses you want to send emails from/to in `EmailFromAddress` and `EmailToAddress`.
 * The SMTP details for your mail server. These can be provided for each call to SendEmail, but it is better to just provide them once in the `if (smtpClient == null)` clause of Utilities.cs\SendEmail
 
-##### Lightwave API Connection Details
+##### Lightwave API Connection Tokens
 
-You will also need to configure the connection details for the Lightwave API - see the call to the LightwaveAPI constructor in MainWindow.xaml.cs
+Set the connection tokens for the Lightwave API in `LightwaveAPIBearerToken` and `LightWaveAPIInitialRefreshToken`.

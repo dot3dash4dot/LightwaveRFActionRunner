@@ -72,7 +72,7 @@ namespace LightwaveDaemon
             // During use of the API, further refresh tokens will be provided which will be handled for you automatically. If you stop
             // being able to access the API at any point, however, you will have to request a new refresh token from the Lightwave site
             // and provide it in this constructor.
-            _api = new LightwaveAPI("INSERT BEARER TOKEN HERE", "INSERT INITIAL REFRESH TOKEN HERE");
+            _api = new LightwaveAPI(Configuration.LightwaveAPIBearerToken, Configuration.LightWaveAPIInitialRefreshToken);
 
             try
             {

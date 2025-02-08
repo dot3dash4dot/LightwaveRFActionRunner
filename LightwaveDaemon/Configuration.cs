@@ -13,7 +13,14 @@ namespace LightwaveDaemon
 
     internal static class Configuration
     {
-        public static string EmailFromAddress = "address@domain.com"; 
+        // In order to connect to the Lightwave API you must provide a bearer ID and an initial refresh token. You can get these
+        // from https://my.lightwaverf.com > Settings > API. (The bearer ID is the long string labelled "Basic" for some reason.)
+        // During use of the API, further refresh tokens will be provided which will be handled for you automatically. If you stop
+        // being able to access the API at any point, however, you will have to request a new refresh token from the Lightwave site
+        // and provide it here
+        public static string LightwaveAPIBearerToken = "";
+        public static string LightWaveAPIInitialRefreshToken = "";
+        public static string EmailFromAddress = "address@domain.com";
         public static string EmailToAddress = "address@domain.com";
 
         //Router connection details
