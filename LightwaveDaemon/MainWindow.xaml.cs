@@ -87,7 +87,14 @@ namespace LightwaveDaemon
             //Check all device names in automations are known
             foreach (DeviceName device in Configuration.DaemonAutomations.SelectMany(x => x.StateChanges).Select(x => x.DeviceName))
             {
-                device.ToDevice(_devices);
+                try
+                {
+                    device.ToDevice(_devices);
+                }
+                catch
+                {
+                    throw new Exception($"Device '{device.DisplayName()}' not found in devices fetched from Lightwave");
+                }
             }
 
             _ = WaitForNextAutomation(true);

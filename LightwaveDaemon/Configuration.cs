@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LightwaveDaemon
 {
     internal enum DeviceName
     {
-        Hallway
+        [Description("Hallway light")]
+        Hallway,
     }
 
     internal static class Configuration
@@ -23,10 +23,6 @@ namespace LightwaveDaemon
 
         public static TimeSpan BedTime => TimeSpan.Parse("23:11"); //The application currently relies on this time being before midnight
 
-        internal static Dictionary<DeviceName, string> DeviceRealNameLookup = new Dictionary<DeviceName, string>
-        {
-            { DeviceName.Hallway, "Hallway light" }
-        };
 
         private static List<DaemonAutomation> _daemonAutomations = new List<DaemonAutomation>
         {
