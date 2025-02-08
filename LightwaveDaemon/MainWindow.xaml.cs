@@ -31,7 +31,7 @@ namespace LightwaveDaemon
         private int _automationRetryCount = 0;
         private int _automationRetryLimit = 3;
 
-        Dictionary<string, TextBlock> _personTextBlocks = new Dictionary<string, TextBlock>();
+        Dictionary<Phone, TextBlock> _personTextBlocks = new Dictionary<Phone, TextBlock>();
         private const string _timeSpanFormat = @"hh\:mm";
 
         public MainWindow()
@@ -41,10 +41,7 @@ namespace LightwaveDaemon
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (var phone in Configuration.Phones)
-            {
-                _personTextBlocks.Add(phone.PersonName, UIHelper.FindVisualChildren<TextBlock>(this).First(x => (x.Tag as string) == phone.PersonName.ToString()));
-            }
+            _personTextBlocks.Add(Configuration.Phones[0], tbPerson1);
 
             Setup();
         }
@@ -193,7 +190,7 @@ namespace LightwaveDaemon
                 }
             }
 
-            _waitTimer = new System.Timers.Timer(waitTime.TotalMilliseconds);
+            _waitTimer = new Timer(waitTime.TotalMilliseconds);
             _waitTimer.Elapsed += timerElapsedHandler;
             _waitTimer.AutoReset = false;
             _waitTimer.Start();
@@ -303,7 +300,7 @@ namespace LightwaveDaemon
             {
                 foreach (var personTextBlock in _personTextBlocks)
                 {
-                    personTextBlock.Value.Text = $"{personTextBlock.Key}: Refreshing";
+                    personTextBlock.Value.Text = $"{personTextBlock.Key.PersonName}: Refreshing";
                 }
             });
 
@@ -321,7 +318,7 @@ namespace LightwaveDaemon
                 {
                     foreach (var personTextBlock in _personTextBlocks)
                     {
-                        personTextBlock.Value.Text = $"{personTextBlock.Key}: Failed";
+                        personTextBlock.Value.Text = $"{personTextBlock.Key.PersonName}: Failed";
                     }
                 });
 
@@ -357,7 +354,7 @@ namespace LightwaveDaemon
 
                 Dispatcher.Invoke(() =>
                 {
-                    _personTextBlocks[phone.PersonName].Text = message;
+                    _personTextBlocks[phone].Text = message;
                 });
 
                 if (!manuallyTriggered)
