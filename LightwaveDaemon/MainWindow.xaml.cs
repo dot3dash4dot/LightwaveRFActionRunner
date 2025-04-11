@@ -311,12 +311,12 @@ namespace LightwaveDaemon
                 }
             });
 
-            IEnumerable<(string Name, string IP)> connectedDevices = null;
+            IEnumerable<string> connectedDevices = null;
             try
             {
                 await Task.Run(async () => //Don't lock the UI
                 {
-                    connectedDevices = await VirginRouter.GetWifiConnectedDevices(Configuration.RouterIP, Configuration.RouterPassword);
+                    connectedDevices = await FritzBoxRouter.GetWifiConnectedDevices(Configuration.RouterIP, Configuration.RouterUsername, Configuration.RouterPassword);
                 });
             }
             catch (Exception ex)
@@ -346,15 +346,7 @@ namespace LightwaveDaemon
             bool anyPhoneHome = false;
             foreach (var phone in Configuration.Phones)
             {
-                bool home;
-                if (phone.IP != null)
-                {
-                    home = connectedDevices.Any(x => x.IP == phone.IP);
-                }
-                else
-                {
-                    home = connectedDevices.Any(x => x.Name == phone.PhoneName);
-                }
+                bool home = connectedDevices.Contains(phone.PhoneName);
 
                 string location = home ? "Home" : "Away";
                 string message = $"{phone.PersonName}: {location}";

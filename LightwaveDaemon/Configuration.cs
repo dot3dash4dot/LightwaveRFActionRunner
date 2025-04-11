@@ -26,6 +26,7 @@ namespace LightwaveDaemon
         //Router connection details
         public static string RouterIP = "";
         public static string RouterPassword = "";
+        public static string RouterUsername = "";
 
         public static Phone[] Phones =
         [

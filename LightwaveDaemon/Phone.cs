@@ -10,13 +10,11 @@ namespace LightwaveDaemon
     {
         public string PersonName { get; }
         public string PhoneName { get; }
-        public string IP { get; }
 
-        public Phone(string personName, string phoneName, string ip = null)
+        public Phone(string personName, string phoneName)
         {
             PersonName = personName;
             PhoneName = phoneName;
-            IP = ip;
         }
     }
 }

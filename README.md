@@ -34,7 +34,7 @@ The implementation of this is so specific that it will only currently work for a
 
 The application currently works out whether anyone is home or not by working out if their phone is on the home wifi network. Originally I planned to do that by setting up my router to give each phone a reserved IP address that could then be pinged, but iPhones don't respond to ping when they're not active!
 
-Instead, I query my Virgin Media Hub 5 broadband router for a list of devices currently connected to it, and then work out if any match the devices you have specified. You can specify the IP address of the phone if you have set this up to be static in the router, or just match by the phone name. (Note that this project previously supported the older Virgin Media Hub 3 - you can see the implementation of this along with a description in the README at the [virgin-media-hub3 tag](https://github.com/dot3dash4dot/LightwaveRFActionRunner/tree/virgin-media-hub3).)
+Instead, I query my FritzBox 7530 AX broadband router for a list of devices currently connected to it, and then work out if any match the devices you have specified. (Note that this project previously supported a Virgin Media Hub 3 and then the newer Virgin Media Hub 5 - you can see the implementation of these along with descriptions in the README at the [virgin-media-hub3](https://github.com/dot3dash4dot/LightwaveRFActionRunner/tree/virgin-media-hub3) and [virgin-media-hub5](https://github.com/dot3dash4dot/LightwaveRFActionRunner/tree/virgin-media-hub5) tags.)
 
 For future reference, other options for a home/away implementation that I considered were:
 * Checking if the phone's bluetooth address is visible to the server
@@ -74,7 +74,7 @@ You can then set up automations to be run at certain times. Each automation has 
 
 ##### Home/Away Dependency
 
-Set the router's connection details in `RouterIP` and `RouterPassword`.
+Set the router's connection details in `RouterIP`, `RouterUsername` and `RouterPassword`.
 
 `Phones` should then contain a list of phones that should be checked when determining if anyone is home.
 
